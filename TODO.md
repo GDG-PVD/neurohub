@@ -1,0 +1,125 @@
+# TODO List - OMI A2A Multi-Agent Demo
+
+## ✅ Completed
+
+- [x] Research Google's A2A protocol and requirements
+- [x] Analyze OMI architecture for integration points
+- [x] Design multi-agent system architecture
+- [x] Create initial project structure
+- [x] Implement Gateway Agent with A2A
+- [x] Create Context Analysis Agent
+- [x] Set up Docker deployment
+- [x] Create demo scenarios
+- [x] Implement ADR registry and initial ADRs
+- [x] Create C4 architecture diagrams
+- [x] Set up documentation structure
+- [x] Evaluate and integrate AgentDB for persistence
+- [x] Add UV package manager support
+- [x] Code review and cleanup:
+  - Fixed bare except clause
+  - Added CORS environment configuration
+  - Improved connection pooling
+  - Added proper __init__.py files
+  - Created test structure
+
+## 🚧 In Progress
+
+- [ ] Complete test implementation
+  - [x] Unit test structure created
+  - [ ] Integration tests for agents
+  - [ ] End-to-end workflow tests
+- [ ] Finalize documentation
+  - [ ] API documentation with OpenAPI
+  - [ ] Update all READMEs
+  - [ ] Cross-link all ADRs
+
+## 📅 Planned
+
+### Phase 1: Core Implementation (Week 1)
+- [ ] Implement comprehensive error handling
+- [ ] Add retry logic for agent communication
+- [ ] Create integration tests
+- [ ] Add health check endpoints for all agents
+
+### Phase 2: Enhanced Features (Week 2)
+- [ ] Implement streaming audio support
+- [ ] Add agent discovery caching
+- [ ] Create monitoring dashboard
+- [ ] Implement rate limiting
+
+### Phase 3: Demo Polish (Week 3)
+- [ ] Create interactive demo UI
+- [ ] Add more demo scenarios:
+  - [ ] Learning Companion
+  - [ ] Personal CRM
+  - [ ] Daily Briefing
+- [ ] Create demo video/presentation
+
+### Phase 4: Production Readiness (Week 4)
+- [ ] Add comprehensive logging
+- [ ] Implement distributed tracing
+- [ ] Create Kubernetes manifests
+- [ ] Write deployment documentation
+- [ ] Performance optimization
+
+## 🔮 Future Enhancements
+
+- [ ] Multi-language support
+- [ ] Agent marketplace concept
+- [ ] Plugin system for custom agents
+- [ ] Web-based agent builder
+- [ ] Integration with more LLM providers
+- [ ] Advanced workflow designer
+- [ ] Real-time collaboration features
+
+## 📄 Documentation Tasks
+
+- [ ] API documentation for all agents
+- [ ] Sequence diagrams for key flows
+- [ ] Performance benchmarking guide
+- [ ] Security best practices
+- [ ] Troubleshooting guide
+- [ ] Video tutorials
+
+## 🧑‍💻 Development Tasks
+
+- [ ] Set up CI/CD pipeline
+- [ ] Add pre-commit hooks
+- [ ] Configure automated testing
+- [ ] Set up code coverage reporting
+- [ ] Add dependency vulnerability scanning
+
+## 🔍 Research Topics
+
+- [ ] Investigate A2A v2 features
+- [ ] Explore agent reasoning chains
+- [ ] Research distributed agent coordination
+- [ ] Study production deployment patterns
+- [ ] Analyze security implications
+
+## 🐛 Known Issues
+
+- [x] ~~WebSocket reconnection logic needed~~ (Fixed with proper error handling)
+- [ ] Memory leak in long-running sessions
+- [ ] Race condition in parallel workflows
+- [ ] Agent discovery timeout handling
+- [ ] AgentDB implementation is placeholder (needs actual SDK)
+- [ ] Missing retry logic for external API calls
+- [ ] No rate limiting on WebSocket endpoints
+
+---
+
+## Notes
+
+- Priorities may shift based on demo feedback
+- Each task should have associated tests
+- Documentation updates required for all changes
+- Follow ADR process for architectural decisions
+
+## Contributing
+
+To add items:
+1. Add task to appropriate section
+2. Include clear description
+3. Link to relevant issues/ADRs
+4. Update when starting/completing tasks

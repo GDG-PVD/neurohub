@@ -1,0 +1,110 @@
+{
+  "agent_id": "omi-gateway",
+  "name": "OMI Conversation Gateway",
+  "description": "Main orchestrator for OMI device conversations, managing multi-agent collaboration for real-time audio processing and intelligent actions.",
+  "version": "1.0.0",
+  "capabilities": [
+    {
+      "name": "process_conversation",
+      "description": "Process a conversation from OMI device through multi-agent pipeline",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "transcript": {
+            "type": "string",
+            "description": "The conversation transcript"
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "Optional URL to the audio file"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional metadata about the conversation",
+            "properties": {
+              "user_id": {"type": "string"},
+              "session_id": {"type": "string"},
+              "timestamp": {"type": "string", "format": "date-time"},
+              "location": {"type": "object"},
+              "participants": {"type": "array"}
+            }
+          }
+        },
+        "required": ["transcript"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "analysis": {
+            "type": "object",
+            "description": "Context analysis results"
+          },
+          "actions": {
+            "type": "array",
+            "description": "Extracted actions to be performed"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief summary of the conversation"
+          }
+        }
+      }
+    },
+    {
+      "name": "stream_audio",
+      "description": "Stream real-time audio for processing",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "audio_format": {
+            "type": "string",
+            "enum": ["opus", "pcm16", "mp3"]
+          },
+          "sample_rate": {
+            "type": "integer",
+            "default": 16000
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "transcript_segments": {"type": "array"},
+          "interim_results": {"type": "boolean"}
+        }
+      }
+    },
+    {
+      "name": "get_status",
+      "description": "Get current gateway status and statistics",
+      "input_schema": {
+        "type": "object"
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string"},
+          "connected_devices": {"type": "integer"},
+          "processed_conversations": {"type": "integer"},
+          "uptime_seconds": {"type": "number"},
+          "active_agents": {"type": "array"}
+        }
+      }
+    }
+  ],
+  "interaction_modes": ["sync", "stream", "async"],
+  "data_types": ["text", "audio", "structured_json"],
+  "authentication": {
+    "type": "bearer",
+    "required": false
+  },
+  "rate_limits": {
+    "requests_per_minute": 100,
+    "concurrent_connections": 50
+  },
+  "tags": ["orchestration", "audio-processing", "omi-device", "conversation-analysis"],
+  "contact": {
+    "email": "support@omi.me",
+    "documentation": "https://docs.omi.me/a2a-integration"
+  }
+}

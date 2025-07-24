@@ -1,0 +1,11 @@
+# UV Configuration
+# https://github.com/astral-sh/uv
+
+# Python version requirement
+required-version = ">=0.5.0"
+
+# Compile bytecode for faster startup
+compile-bytecode = true
+
+# Index configuration
+index-url = "https://pypi.org/simple"

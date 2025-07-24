@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  # OMI Gateway Agent - Main orchestrator
+  omi-gateway:
+    build:
+      context: .
+      dockerfile: agents/omi_gateway/Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - OMI_API_URL=${OMI_API_URL:-http://host.docker.internal:8000}
+      - OMI_API_KEY=${OMI_API_KEY}
+      - A2A_AGENT_PORT=8000
+      - AGENT_ID=omi-gateway
+      - ENV=${ENV:-development}
+    volumes:
+      - ./agents/omi_gateway:/app
+    networks:
+      - a2a-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Context Analysis Agent
+  context-agent:
+    build:
+      context: .
+      dockerfile: agents/context_analysis/Dockerfile
+    ports:
+      - "8002:8000"
+    environment:
+      - A2A_AGENT_PORT=8000
+      - AGENT_ID=context-analysis
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./agents/context_analysis:/app
+    networks:
+      - a2a-network
+    restart: unless-stopped
+
+  # Action Planning Agent
+  action-agent:
+    build:
+      context: .
+      dockerfile: agents/action_planning/Dockerfile
+    ports:
+      - "8003:8000"
+    environment:
+      - A2A_AGENT_PORT=8000
+      - AGENT_ID=action-planning
+    volumes:
+      - ./agents/action_planning:/app
+    networks:
+      - a2a-network
+    restart: unless-stopped
+
+  # Knowledge Agent
+  knowledge-agent:
+    build:
+      context: .
+      dockerfile: agents/knowledge/Dockerfile
+    ports:
+      - "8004:8000"
+    environment:
+      - A2A_AGENT_PORT=8000
+      - AGENT_ID=knowledge
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./agents/knowledge:/app
+    networks:
+      - a2a-network
+    restart: unless-stopped
+
+  # Communication Agent
+  communication-agent:
+    build:
+      context: .
+      dockerfile: agents/communication/Dockerfile
+    ports:
+      - "8005:8000"
+    environment:
+      - A2A_AGENT_PORT=8000
+      - AGENT_ID=communication
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+    volumes:
+      - ./agents/communication:/app
+    networks:
+      - a2a-network
+    restart: unless-stopped
+
+  # Demo UI
+  demo-ui:
+    build:
+      context: .
+      dockerfile: demo/ui/Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      - NEXT_PUBLIC_GATEWAY_URL=http://localhost:8001
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8001/ws
+    networks:
+      - a2a-network
+    depends_on:
+      - omi-gateway
+
+  # Redis for caching and pub/sub
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - a2a-network
+    volumes:
+      - redis-data:/data
+
+networks:
+  a2a-network:
+    driver: bridge
+
+volumes:
+  redis-data:

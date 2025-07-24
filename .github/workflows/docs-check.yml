@@ -1,0 +1,73 @@
+name: Documentation Quality Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - 'docs/**'
+      - '.github/workflows/docs-check.yml'
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install markdown-link-check
+        pip install proselint
+        npm install -g markdownlint-cli
+    
+    - name: Check markdown formatting
+      run: markdownlint '**/*.md' --config .markdownlint.yml
+    
+    - name: Check for broken links
+      run: |
+        find . -name "*.md" -print0 | \
+        xargs -0 -n1 markdown-link-check --config .markdown-link-check.json
+    
+    - name: Check documentation completeness
+      run: |
+        # Check that all agents have README files
+        for dir in agents/*/; do
+          if [ ! -f "$dir/README.md" ]; then
+            echo "ERROR: Missing README.md in $dir"
+            exit 1
+          fi
+        done
+        
+        # Check ADR registry is up to date
+        adr_count=$(ls docs/adr/*.md | grep -E '[0-9]{3}-' | wc -l)
+        registry_count=$(grep -c '^|' docs/adr/README.md | tail -n +2)
+        
+        if [ $adr_count -ne $registry_count ]; then
+          echo "ERROR: ADR registry is out of sync"
+          echo "Found $adr_count ADR files but $registry_count registry entries"
+          exit 1
+        fi
+    
+    - name: Generate documentation report
+      run: |
+        echo "## Documentation Quality Report" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Count documentation files
+        doc_count=$(find . -name "*.md" | wc -l)
+        echo "- Total documentation files: $doc_count" >> $GITHUB_STEP_SUMMARY
+        
+        # Count ADRs
+        adr_count=$(ls docs/adr/*.md | grep -E '[0-9]{3}-' | wc -l)
+        echo "- Architecture Decision Records: $adr_count" >> $GITHUB_STEP_SUMMARY
+        
+        # Check for TODOs in docs
+        todo_count=$(grep -r "TODO" docs/ --include="*.md" | wc -l)
+        if [ $todo_count -gt 0 ]; then
+          echo "- ⚠️  Found $todo_count TODO items in documentation" >> $GITHUB_STEP_SUMMARY
+        fi
