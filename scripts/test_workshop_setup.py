@@ -138,7 +138,7 @@ async def test_environment():
     print(f"\n{BLUE}🧪 Testing Core Imports{NC}\n")
     
     try:
-        from core.a2a_client import A2AAgent, A2ATask
+        from core.a2a_wrappers import A2AAgent, A2ATask
         print_status("A2A client imports: Success", True)
     except Exception as e:
         print_status(f"A2A client imports: Failed - {e}", False)
@@ -231,7 +231,8 @@ async def test_simple_agent():
     print(f"\n{BLUE}🧪 Testing Simple Agent Creation{NC}\n")
     
     try:
-        from agents.templates.agent_builder import CustomAgent, A2ATask
+        from agents.templates.agent_builder import CustomAgent
+        from core.a2a_wrappers import A2ATask
         
         # Create simple agent
         agent = CustomAgent(

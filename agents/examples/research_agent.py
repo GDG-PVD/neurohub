@@ -10,8 +10,7 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from dataclasses import dataclass
 
-from core.a2a_client import A2AAgent, A2ATask
-from integrations.omi_connector import OMIMemory
+from core.a2a_wrappers import A2AAgent, A2ATask
 
 # FutureHouse client wrapper
 class FutureHouseClient:

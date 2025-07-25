@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 from dataclasses import dataclass, field
 
-from core.a2a_client import A2AAgent, A2ATask, A2AOrchestrator
+from core.a2a_wrappers import A2AAgent, A2ATask, A2AOrchestrator
 
 
 @dataclass

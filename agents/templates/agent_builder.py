@@ -12,8 +12,7 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 import logging
 
-from core.a2a_client import A2AAgent, A2ATask
-from integrations.omi_connector import OMIMemory
+from core.a2a_wrappers import A2AAgent, A2ATask
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
