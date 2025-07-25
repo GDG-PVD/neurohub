@@ -48,6 +48,17 @@
 - [x] Remove dead AgentDB code
 - [x] Create tests for memory features
 
+### Workshop Hackathon Framework (2025-01-25)
+- [x] Create 2-week hackathon guide
+- [x] Implement functional research agent with FutureHouse API
+- [x] Build team collaboration agent example
+- [x] Create CustomAgent template with MCP integration
+- [x] Develop team setup script
+- [x] Design neuro-focused agents (6 specialized agents)
+- [x] Create agent builder framework
+- [x] Document Three Layer IA alignment
+- [x] Add rich terminal output for demos
+
 ## 🚧 In Progress
 
 - [ ] Complete test implementation

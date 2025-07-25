@@ -1,0 +1,1 @@
+"""Example agents for NeuroHub workshop"""
