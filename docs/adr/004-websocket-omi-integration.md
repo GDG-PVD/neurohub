@@ -89,6 +89,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 - [WebSocket Protocol RFC 6455](https://datatracker.ietf.org/doc/html/rfc6455)
 - [ADR-002: Gateway Pattern](002-agent-orchestration-pattern.md) - Gateway manages WebSocket connections
+- [ADR-010: Memory Integration](010-memory-integration.md) - Processes memories captured via WebSocket
 - [FastAPI WebSocket Documentation](https://fastapi.tiangolo.com/advanced/websockets/)
 
 ## Notes

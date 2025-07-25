@@ -52,5 +52,6 @@ Create `demo_simple.py` that simulates multi-agent responses while connecting to
 
 ## Related
 - [ADR-008: Cloud Deployment](008-cloud-deployment.md) - Complementary simplification
+- [ADR-010: Memory Integration](010-memory-integration.md) - Enhanced demo with memory features
 - [Working Demo Summary](../../WORKING_DEMO_SUMMARY.md)
 - [Student Guide](../../STUDENT_GUIDE.md)

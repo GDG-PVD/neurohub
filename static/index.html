@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroHub Workshop Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .team-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .team-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .team-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .team-meta {
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .demo-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e1e1;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+            min-width: 150px;
+            margin: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 NeuroHub Workshop</h1>
+            <p class="subtitle">Multi-Agent AI Demo with OMI Devices</p>
+        </header>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="teamCount">0</div>
+                <div class="stat-label">Teams Registered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="demoCount">0</div>
+                <div class="stat-label">Demos Run</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Register Your Team</h2>
+            <div id="alert" class="alert"></div>
+            
+            <form id="teamForm">
+                <div class="form-group">
+                    <label for="teamName">Team Name</label>
+                    <input type="text" id="teamName" required placeholder="e.g., Neural Ninjas">
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDescription">Project Description</label>
+                    <textarea id="projectDescription" required placeholder="Describe what you're building with OMI..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="omiApiKey">OMI API Key</label>
+                    <input type="text" id="omiApiKey" required placeholder="Your OMI device API key">
+                </div>
+                
+                <button type="submit" class="btn">Register Team</button>
+            </form>
+            
+            <div class="demo-section">
+                <h3>Test Your Integration</h3>
+                <p style="margin-bottom: 15px; color: #666;">Once registered, test your OMI integration with a sample conversation:</p>
+                
+                <div class="form-group">
+                    <label for="testTranscript">Sample Conversation</label>
+                    <textarea id="testTranscript" placeholder="Enter a conversation to analyze...">Sarah: Let's review our progress on the AI assistant.
+John: We've integrated the OMI device successfully. The real-time transcription is working great.
+Sarah: Excellent! Can you send me a summary by end of day?
+Mike: I'll help with the documentation. Should we schedule a demo for tomorrow?</textarea>
+                </div>
+                
+                <button id="runDemo" class="btn" onclick="runDemo()">Run Analysis</button>
+                
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing conversation...</p>
+                </div>
+                
+                <div id="demoResult" style="display: none; margin-top: 20px;"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Registered Teams</h2>
+            <div id="teamsList" class="teams-grid">
+                <p style="color: #999; text-align: center; grid-column: 1/-1;">No teams registered yet. Be the first!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = window.location.origin;
+        let registeredTeam = null;
+        
+        // Load teams on page load
+        loadTeams();
+        
+        // Form submission
+        document.getElementById('teamForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                team_name: document.getElementById('teamName').value,
+                project_description: document.getElementById('projectDescription').value,
+                omi_api_key: document.getElementById('omiApiKey').value
+            };
+            
+            try {
+                const response = await fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('Team registered successfully! You can now test your integration.', 'success');
+                    registeredTeam = data;
+                    document.getElementById('teamForm').reset();
+                    loadTeams();
+                } else {
+                    showAlert(data.detail || 'Registration failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showAlert('Network error. Please check your connection.', 'error');
+            }
+        });
+        
+        async function loadTeams() {
+            try {
+                const response = await fetch(`${API_URL}/teams`);
+                const teams = await response.json();
+                
+                document.getElementById('teamCount').textContent = teams.length;
+                
+                const teamsList = document.getElementById('teamsList');
+                if (teams.length === 0) {
+                    teamsList.innerHTML = '<p style="color: #999; text-align: center; grid-column: 1/-1;">No teams registered yet. Be the first!</p>';
+                } else {
+                    teamsList.innerHTML = teams.map(team => `
+                        <div class="team-card">
+                            <div class="team-name">${escapeHtml(team.team_name)}</div>
+                            <div class="team-description">${escapeHtml(team.project_description)}</div>
+                            <div class="team-meta">Registered ${formatTime(team.registered_at)}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Failed to load teams:', error);
+            }
+        }
+        
+        async function runDemo() {
+            const transcript = document.getElementById('testTranscript').value;
+            if (!transcript.trim()) {
+                showAlert('Please enter a conversation to analyze.', 'error');
+                return;
+            }
+            
+            if (!registeredTeam) {
+                showAlert('Please register your team first.', 'error');
+                return;
+            }
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('demoResult').style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_URL}/demo`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        transcript: transcript,
+                        team_id: registeredTeam.id
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayDemoResult(result);
+                    updateDemoCount();
+                } else {
+                    showAlert('Demo failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showAlert('Network error. Please check your connection.', 'error');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        function displayDemoResult(result) {
+            const resultDiv = document.getElementById('demoResult');
+            resultDiv.innerHTML = `
+                <h4>Analysis Results</h4>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                    <h5>📊 Context Analysis</h5>
+                    <p><strong>Topic:</strong> ${result.analysis.context.topic}</p>
+                    <p><strong>Participants:</strong> ${result.analysis.context.participants}</p>
+                    <p><strong>Sentiment:</strong> ${result.analysis.context.sentiment}</p>
+                    
+                    <h5 style="margin-top: 20px;">📋 Action Items</h5>
+                    ${result.actions.length > 0 ? 
+                        '<ul>' + result.actions.map(action => 
+                            `<li><strong>${action.type}:</strong> ${action.description}</li>`
+                        ).join('') + '</ul>' 
+                        : '<p>No action items detected.</p>'
+                    }
+                    
+                    <h5 style="margin-top: 20px;">📝 Summary</h5>
+                    <p>${result.summary}</p>
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        }
+        
+        async function updateDemoCount() {
+            try {
+                const response = await fetch(`${API_URL}/stats`);
+                const stats = await response.json();
+                document.getElementById('demoCount').textContent = stats.demos_run || 0;
+            } catch (error) {
+                console.error('Failed to update stats:', error);
+            }
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert alert-${type}`;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+        
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'just now';
+            if (diff < 3600000) return `${Math.floor(diff / 60000)} minutes ago`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)} hours ago`;
+            return date.toLocaleDateString();
+        }
+        
+        // Auto-refresh teams every 30 seconds
+        setInterval(loadTeams, 30000);
+    </script>
+</body>
+</html>

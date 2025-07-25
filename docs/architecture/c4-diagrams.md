@@ -18,12 +18,14 @@ graph TB
     System[OMI Multi-Agent System]:::system
     OMIBackend[OMI Backend API]:::external
     OpenAI[OpenAI API]:::external
+    Mem0[Mem0 Memory Platform]:::external
     ExtServices[External Services<br/>Email, Calendar, etc.]:::external
     
     %% Relationships
     User -->|Audio/Commands| System
     System -->|Results/Actions| User
     System -->|User Data/Memories| OMIBackend
+    System -->|Memory Storage/Search| Mem0
     System -->|LLM Requests| OpenAI
     System -->|Actions| ExtServices
 ```
@@ -44,7 +46,7 @@ graph TB
     %% External
     User[User with OMI Device]:::person
     OMIBackend[OMI Backend API]:::external
-    AgentDB[AgentDB Cloud<br/>Serverless Database]:::agentdb
+    Mem0[Mem0 Memory Platform<br/>AI Memory Storage]:::external
     
     %% Containers
     subgraph System[OMI Multi-Agent System]
@@ -52,25 +54,28 @@ graph TB
         Context[Context Analysis Agent<br/>Python/A2A<br/>Port 8002]:::container
         Action[Action Planning Agent<br/>Python/A2A<br/>Port 8003]:::container
         Knowledge[Knowledge Agent<br/>Python/A2A<br/>Port 8004]:::container
-        Comm[Communication Agent<br/>Python/A2A<br/>Port 8005]:::container
+        Workshop[Workshop Server<br/>Python/FastAPI<br/>Port 8000]:::container
+        MemBridge[Memory Bridge<br/>Python Component]:::container
         Redis[(Redis Cache)]:::db
     end
     
     %% Relationships
     User -->|WebSocket| Gateway
+    User -->|HTTP| Workshop
     Gateway -->|A2A Protocol| Context
     Gateway -->|A2A Protocol| Action
     Gateway -->|A2A Protocol| Knowledge
-    Gateway -->|A2A Protocol| Comm
     Gateway -->|Cache| Redis
     Gateway -->|API Calls| OMIBackend
+    Workshop -->|Uses| Gateway
+    Workshop -->|Uses| MemBridge
     
-    %% AgentDB connections
-    Context -->|Store/Query| AgentDB
-    Action -->|Task History| AgentDB
-    Knowledge -->|Vector Search| AgentDB
-    Comm -->|Message Logs| AgentDB
-    Gateway -->|Conversation DB| AgentDB
+    %% Memory connections
+    MemBridge -->|Sync Memories| OMIBackend
+    MemBridge -->|Store/Search| Mem0
+    Context -->|Memory Context| MemBridge
+    Action -->|Store Insights| MemBridge
+    Knowledge -->|Query Memories| MemBridge
 ```
 
 ## Level 3: Component Diagram - Gateway Agent
@@ -168,6 +173,8 @@ graph TB
 3. **Docker Deployment**: Each agent runs in its own container
 4. **WebSocket Integration**: Real-time communication with OMI devices
 5. **Workflow Orchestration**: Gateway manages multi-agent workflows
+6. **Memory Integration**: OMI memories synced with Mem0 for persistent storage
+7. **Memory Bridge**: Unified interface for memory operations across agents
 
 ## References
 
@@ -175,3 +182,5 @@ graph TB
 - [ADR-001: A2A Protocol](../adr/001-use-a2a-protocol.md)
 - [ADR-002: Gateway Pattern](../adr/002-agent-orchestration-pattern.md)
 - [ADR-003: Docker Deployment](../adr/003-docker-deployment.md)
+- [ADR-010: Memory Integration](../adr/010-memory-integration.md)
+- [Memory Integration Guide](../MEMORY_INTEGRATION.md)

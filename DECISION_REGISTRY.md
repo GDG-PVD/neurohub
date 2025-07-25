@@ -15,6 +15,7 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 | D007 | 2024-01-14 | UV package manager adoption | ✅ Implemented | [ADR-007](docs/adr/007-uv-package-manager.md) |
 | D008 | 2024-01-15 | Cloud deployment for workshops | ✅ Implemented | [ADR-008](docs/adr/008-cloud-deployment.md) |
 | D009 | 2024-01-15 | Simplified demo for education | ✅ Implemented | [ADR-009](docs/adr/009-simplified-demo.md) |
+| D010 | 2025-01-25 | OMI-Mem0 memory integration | ✅ Implemented | [ADR-010](docs/adr/010-memory-integration.md) |
 
 ## Decision Details
 
@@ -72,6 +73,12 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 - **Consequences**: Less realistic, but better for learning
 - **Status**: Primary demo path
 
+### D010: OMI-Mem0 Memory Integration
+- **Context**: Need persistent memory storage for workshop teams
+- **Decision**: Integrate OMI memories with Mem0 platform
+- **Consequences**: Enhanced AI capabilities, optional dependency
+- **Status**: Fully implemented with fallback
+
 ## Decision Process
 
 1. **Identify Need**: Problem or opportunity arises
@@ -97,6 +104,7 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 |----------|---------------|---------|
 | Full AgentDB integration | Mock implementation | AgentDB SDK not ready |
 | Local Docker requirement | Cloud deployment | Too complex for students |
+| AgentDB for workshop persistence | Mem0 integration | AgentDB API issues, Mem0 better fit |
 
 ## Related Documents
 
@@ -107,4 +115,4 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 
 ---
 
-*Last Updated: 2024-01-15*
+*Last Updated: 2025-01-25*

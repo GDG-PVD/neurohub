@@ -14,6 +14,8 @@ NeuroHub demonstrates how wearable AI devices (like OMI) can work with multiple 
 
 - **Real OMI Integration**: Connect to actual OMI wearable device APIs
 - **Multi-Agent Simulation**: See how specialized AI agents can work together
+- **Memory Integration**: Sync OMI memories with Mem0 for persistent, searchable storage
+- **Context-Aware AI**: Agents can access past conversations for better responses
 - **Educational Focus**: Perfect for students learning about AI systems
 - **Easy Setup**: Simplified installation with UV package manager
 
@@ -92,6 +94,27 @@ After completing this demo, you'll understand:
 2. The basics of distributed AI systems
 3. How wearable devices integrate with AI services
 4. The importance of modular architecture in AI systems
+
+## 💾 Memory Integration (Advanced)
+
+NeuroHub now supports advanced memory features through integration with [Mem0](https://mem0.ai):
+
+### Features
+- **Memory Sync**: Automatically sync OMI device memories to Mem0
+- **Contextual Search**: Search across all team conversations
+- **Memory Analysis**: Get insights about conversation patterns
+- **Context-Aware AI**: Agents use past memories for better responses
+
+### Setup
+```bash
+# Set your Mem0 API key (optional)
+export MEM0_API_KEY=your_mem0_api_key
+
+# Run the enhanced server
+uv run python workshop_server_enhanced.py
+```
+
+See [Memory Integration Guide](docs/MEMORY_INTEGRATION.md) for detailed documentation.
 
 ## 🤝 Contributing
 

@@ -1,0 +1,48 @@
+# fly.toml app configuration file generated for neurohub-workshop on 2025-07-24T20:19:59-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'neurohub-workshop'
+primary_region = 'bos'
+kill_signal = 'SIGINT'
+kill_timeout = '5s'
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  LOG_LEVEL = 'info'
+  OMI_API_KEY = 'neurohub_workshop_2024'
+  PORT = '8000'
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 8000
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 100
+    soft_limit = 80
+
+  [[services.http_checks]]
+    interval = '30s'
+    timeout = '3s'
+    grace_period = '5s'
+    method = 'get'
+    path = '/health'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+

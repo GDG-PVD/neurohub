@@ -40,6 +40,9 @@ dependencies = [
     # Monitoring
     "prometheus-client>=0.18.0",
     "structlog>=23.0.0",
+    
+    # Memory storage
+    "mem0ai>=0.0.5",
 ]
 
 [project.optional-dependencies]

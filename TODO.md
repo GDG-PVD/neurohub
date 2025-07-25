@@ -36,6 +36,18 @@
 - [x] Clean up codebase for public release
 - [x] Push to GitHub (GDG-PVD/neurohub)
 
+### Memory Integration (2025-01-25)
+- [x] Create OMI-Mem0 memory bridge
+- [x] Implement memory sync functionality
+- [x] Add memory search capabilities
+- [x] Create memory analysis endpoints
+- [x] Update dashboard with Memory Lab
+- [x] Create enhanced workshop server
+- [x] Write memory integration documentation
+- [x] Create ADR-010 for memory integration
+- [x] Remove dead AgentDB code
+- [x] Create tests for memory features
+
 ## 🚧 In Progress
 
 - [ ] Complete test implementation

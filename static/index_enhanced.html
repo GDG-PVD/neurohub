@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroHub Workshop - Memory Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .secondary-button {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .secondary-button:hover {
+            background: #cbd5e0;
+        }
+        
+        .team-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .team-item {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .team-item:hover {
+            border-color: #667eea;
+            background: #fff;
+        }
+        
+        .team-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #718096;
+        }
+        
+        .error {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            color: #276749;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-result {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .analysis-section {
+            margin-top: 1rem;
+        }
+        
+        .analysis-section h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .action-item {
+            background: #edf2f7;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #667eea;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #718096;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab:hover {
+            color: #667eea;
+        }
+        
+        .memory-features {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .memory-badge {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .memory-context {
+            background: #f7fafc;
+            border-left: 3px solid #667eea;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+        
+        .memory-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .relevance-score {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .insight-card {
+            background: #f7fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .insight-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .insight-label {
+            font-size: 0.875rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 NeuroHub Workshop</h1>
+            <p class="subtitle">Multi-Agent AI Demo with OMI Devices & Memory Integration</p>
+            <div class="features">
+                <span class="feature-badge">🎙️ OMI Device Integration</span>
+                <span class="feature-badge">🤖 Multi-Agent AI</span>
+                <span class="feature-badge">💾 Mem0 Memory Storage</span>
+                <span class="feature-badge">🔍 Context-Aware Processing</span>
+            </div>
+        </header>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <span class="stat-value" id="teamsCount">0</span>
+                <span class="stat-label">Teams Registered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="demosCount">0</span>
+                <span class="stat-label">Demos Run</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="activeTeamsCount">0</span>
+                <span class="stat-label">Active Teams</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="memoriesCount">0</span>
+                <span class="stat-label">Memories Synced</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('register')">Register Team</button>
+            <button class="tab" onclick="showTab('teams')">Teams</button>
+            <button class="tab" onclick="showTab('demo')">Run Demo</button>
+            <button class="tab" onclick="showTab('memory')">Memory Lab</button>
+        </div>
+
+        <div id="register-tab" class="tab-content">
+            <div class="card">
+                <h2>Register Your Team</h2>
+                <div id="registerError" class="error" style="display: none;"></div>
+                <div id="registerSuccess" class="success" style="display: none;"></div>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="teamName">Team Name</label>
+                        <input type="text" id="teamName" required placeholder="Enter your team name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description</label>
+                        <textarea id="projectDescription" rows="3" required placeholder="Describe your project idea"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="omiApiKey">OMI API Key</label>
+                        <input type="text" id="omiApiKey" required placeholder="omi_xxxx">
+                        <small style="color: #718096;">Get your API key from the OMI app</small>
+                    </div>
+                    
+                    <button type="submit">Register Team</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="teams-tab" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>Registered Teams</h2>
+                <div id="teamsList" class="team-list">
+                    <p style="color: #718096;">Loading teams...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="demo-tab" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>Run Demo Analysis</h2>
+                <div id="demoError" class="error" style="display: none;"></div>
+                
+                <form id="demoForm">
+                    <div class="form-group">
+                        <label for="teamSelect">Select Your Team</label>
+                        <select id="teamSelect" required>
+                            <option value="">Choose your team...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transcript">Conversation Transcript</label>
+                        <textarea id="transcript" rows="6" required placeholder="Paste or type a conversation transcript...
+
+Example:
+Alice: Hey team, let's discuss our progress on the AI integration.
+Bob: Sure! I've been working on connecting the OMI device to our backend.
+Alice: Great! We should schedule a meeting tomorrow to review the implementation.
+Bob: Agreed. I'll also send an email with the documentation I've prepared."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="useMemoryContext" checked>
+                            Use Memory Context (if available)
+                        </label>
+                    </div>
+                    
+                    <button type="submit">Analyze Conversation</button>
+                </form>
+                
+                <div id="demoResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="memory-tab" class="tab-content" style="display: none;">
+            <div class="grid">
+                <div class="card">
+                    <h3>Memory Sync</h3>
+                    <div class="memory-features">
+                        <p>Sync your OMI device memories to Mem0 for enhanced AI capabilities.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="memorySyncTeam">Select Team</label>
+                        <select id="memorySyncTeam">
+                            <option value="">Choose team...</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="syncMemories()" id="syncButton">
+                        Sync OMI Memories
+                    </button>
+                    
+                    <div id="syncResult" style="margin-top: 1rem;"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>Memory Search</h3>
+                    <div class="memory-features">
+                        <p>Search through your team's stored memories.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="memorySearchTeam">Select Team</label>
+                        <select id="memorySearchTeam">
+                            <option value="">Choose team...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="searchQuery">Search Query</label>
+                        <input type="text" id="searchQuery" placeholder="Search memories...">
+                    </div>
+                    
+                    <button onclick="searchMemories()">Search</button>
+                    
+                    <div id="searchResults" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Team Memory Insights</h3>
+                <div class="form-group">
+                    <label for="insightsTeam">Select Team</label>
+                    <select id="insightsTeam">
+                        <option value="">Choose team...</option>
+                    </select>
+                </div>
+                
+                <button onclick="getInsights()">Analyze Team Memories</button>
+                
+                <div id="insightsResult" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '';
+        let currentTab = 'register';
+        let memoryFeaturesEnabled = false;
+
+        // Tab management
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            event.target.classList.add('active');
+            currentTab = tabName;
+            
+            if (tabName === 'teams') {
+                loadTeams();
+            }
+        }
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/stats`);
+                const stats = await response.json();
+                
+                document.getElementById('teamsCount').textContent = stats.teams_registered || 0;
+                document.getElementById('demosCount').textContent = stats.demos_run || 0;
+                document.getElementById('activeTeamsCount').textContent = stats.active_teams || 0;
+                document.getElementById('memoriesCount').textContent = stats.total_memories_synced || 0;
+                
+                memoryFeaturesEnabled = stats.memory_features_enabled || false;
+                
+                // Show/hide memory tab based on availability
+                const memoryTab = document.querySelector('.tab:nth-child(4)');
+                if (!memoryFeaturesEnabled) {
+                    memoryTab.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+
+        // Load teams
+        async function loadTeams() {
+            try {
+                const response = await fetch(`${API_BASE}/teams`);
+                const teams = await response.json();
+                
+                const teamsList = document.getElementById('teamsList');
+                const teamSelect = document.getElementById('teamSelect');
+                const memorySyncTeam = document.getElementById('memorySyncTeam');
+                const memorySearchTeam = document.getElementById('memorySearchTeam');
+                const insightsTeam = document.getElementById('insightsTeam');
+                
+                // Clear existing options
+                teamSelect.innerHTML = '<option value="">Choose your team...</option>';
+                memorySyncTeam.innerHTML = '<option value="">Choose team...</option>';
+                memorySearchTeam.innerHTML = '<option value="">Choose team...</option>';
+                insightsTeam.innerHTML = '<option value="">Choose team...</option>';
+                
+                if (teams.length === 0) {
+                    teamsList.innerHTML = '<p style="color: #718096;">No teams registered yet.</p>';
+                } else {
+                    teamsList.innerHTML = teams.map(team => `
+                        <div class="team-item">
+                            <div class="team-name">${team.team_name}</div>
+                            <div>${team.project_description}</div>
+                            <div class="team-meta">
+                                <span>Registered: ${new Date(team.registered_at).toLocaleString()}</span>
+                                <span>Demos: ${team.demos_run}</span>
+                                ${team.memory_features_enabled ? `<span>Memories: ${team.memories_synced || 0}</span>` : ''}
+                                ${team.memory_features_enabled ? '<span class="memory-badge">Memory Enabled</span>' : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Update select options
+                    teams.forEach(team => {
+                        const option = `<option value="${team.id}">${team.team_name}</option>`;
+                        teamSelect.innerHTML += option;
+                        memorySyncTeam.innerHTML += option;
+                        memorySearchTeam.innerHTML += option;
+                        insightsTeam.innerHTML += option;
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to load teams:', error);
+                document.getElementById('teamsList').innerHTML = '<p style="color: #c53030;">Failed to load teams.</p>';
+            }
+        }
+
+        // Register team
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            const data = {
+                team_name: document.getElementById('teamName').value,
+                project_description: document.getElementById('projectDescription').value,
+                omi_api_key: document.getElementById('omiApiKey').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Registration failed');
+                }
+                
+                const result = await response.json();
+                successDiv.textContent = `Team "${result.team_name}" registered successfully!`;
+                successDiv.style.display = 'block';
+                
+                // Clear form
+                document.getElementById('registerForm').reset();
+                
+                // Reload stats
+                loadStats();
+                
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Run demo
+        document.getElementById('demoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorDiv = document.getElementById('demoError');
+            const resultDiv = document.getElementById('demoResult');
+            errorDiv.style.display = 'none';
+            resultDiv.style.display = 'none';
+            
+            const data = {
+                team_id: document.getElementById('teamSelect').value,
+                transcript: document.getElementById('transcript').value,
+                use_memory_context: document.getElementById('useMemoryContext').checked
+            };
+            
+            if (!data.team_id) {
+                errorDiv.textContent = 'Please select a team';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/demo`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Demo analysis failed');
+                }
+                
+                const result = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="demo-result">
+                        <h3>Analysis Results</h3>
+                        
+                        <div class="analysis-section">
+                            <h4>Summary</h4>
+                            <p>${result.summary}</p>
+                        </div>
+                        
+                        ${result.memory_context && result.memory_context.length > 0 ? `
+                            <div class="memory-context">
+                                <h4>📚 Memory Context Used</h4>
+                                ${result.memory_context.map(mem => `
+                                    <div class="memory-item">
+                                        <div class="relevance-score">Relevance: ${(mem.relevance * 100).toFixed(0)}%</div>
+                                        <div>${mem.content}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="analysis-section">
+                            <h4>Context Analysis</h4>
+                            <ul>
+                                <li>Topic: ${result.analysis.context.topic}</li>
+                                <li>Participants: ${result.analysis.context.participants}</li>
+                                <li>Sentiment: ${result.analysis.context.sentiment}</li>
+                                ${result.analysis.context.memory_enhanced ? '<li>✅ Enhanced with memory context</li>' : ''}
+                            </ul>
+                        </div>
+                        
+                        <div class="analysis-section">
+                            <h4>Key Points</h4>
+                            <ul>
+                                ${result.analysis.key_points.map(point => `<li>${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        ${result.actions.length > 0 ? `
+                            <div class="analysis-section">
+                                <h4>Action Items</h4>
+                                ${result.actions.map(action => `
+                                    <div class="action-item">
+                                        <strong>${action.type}</strong>: ${action.description}
+                                        ${action.assignee ? `<br>Assignee: ${action.assignee}` : ''}
+                                        ${action.deadline ? `<br>Deadline: ${action.deadline}` : ''}
+                                        ${action.context ? `<br><em>${action.context}</em>` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                resultDiv.style.display = 'block';
+                
+                // Reload stats
+                loadStats();
+                
+            } catch (error) {
+                errorDiv.textContent = error.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Memory sync
+        async function syncMemories() {
+            const teamId = document.getElementById('memorySyncTeam').value;
+            const resultDiv = document.getElementById('syncResult');
+            const button = document.getElementById('syncButton');
+            
+            if (!teamId) {
+                resultDiv.innerHTML = '<p class="error">Please select a team</p>';
+                return;
+            }
+            
+            button.disabled = true;
+            button.innerHTML = 'Syncing... <span class="loading"></span>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/memory/sync`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ team_id: teamId })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Sync failed');
+                }
+                
+                const result = await response.json();
+                resultDiv.innerHTML = '<p class="success">Memory sync started! Check back in a moment.</p>';
+                
+                // Reload stats after a delay
+                setTimeout(loadStats, 3000);
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Sync failed: ${error.message}</p>`;
+            } finally {
+                button.disabled = false;
+                button.innerHTML = 'Sync OMI Memories';
+            }
+        }
+
+        // Memory search
+        async function searchMemories() {
+            const teamId = document.getElementById('memorySearchTeam').value;
+            const query = document.getElementById('searchQuery').value;
+            const resultDiv = document.getElementById('searchResults');
+            
+            if (!teamId || !query) {
+                resultDiv.innerHTML = '<p class="error">Please select a team and enter a search query</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/memory/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ team_id: teamId, query: query })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Search failed');
+                }
+                
+                const result = await response.json();
+                
+                if (result.results.length === 0) {
+                    resultDiv.innerHTML = '<p>No memories found matching your query.</p>';
+                } else {
+                    resultDiv.innerHTML = `
+                        <h4>Found ${result.count} memories:</h4>
+                        ${result.results.map(mem => `
+                            <div class="memory-item">
+                                <div class="relevance-score">Score: ${(mem.score * 100).toFixed(0)}%</div>
+                                <div>${mem.content}</div>
+                                <small>Source: ${mem.source}</small>
+                            </div>
+                        `).join('')}
+                    `;
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Search failed: ${error.message}</p>`;
+            }
+        }
+
+        // Get insights
+        async function getInsights() {
+            const teamId = document.getElementById('insightsTeam').value;
+            const resultDiv = document.getElementById('insightsResult');
+            
+            if (!teamId) {
+                resultDiv.innerHTML = '<p class="error">Please select a team</p>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<p>Analyzing team memories... <span class="loading"></span></p>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/memory/analysis/${teamId}`);
+                
+                if (!response.ok) {
+                    throw new Error('Analysis failed');
+                }
+                
+                const result = await response.json();
+                const insights = result.insights;
+                
+                if (insights.error) {
+                    resultDiv.innerHTML = `<p class="error">Analysis failed: ${insights.error}</p>`;
+                    return;
+                }
+                
+                resultDiv.innerHTML = `
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-value">${insights.total_memories}</div>
+                            <div class="insight-label">Total Memories</div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-value">${insights.total_duration_minutes}</div>
+                            <div class="insight-label">Minutes Recorded</div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-value">${insights.unique_participants.length}</div>
+                            <div class="insight-label">Unique Participants</div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-value">${insights.action_items_count}</div>
+                            <div class="insight-label">Action Items</div>
+                        </div>
+                    </div>
+                    
+                    ${insights.top_topics && insights.top_topics.length > 0 ? `
+                        <div class="analysis-section">
+                            <h4>Top Topics</h4>
+                            <ul>
+                                ${insights.top_topics.map(([topic, count]) => 
+                                    `<li>${topic} (${count} mentions)</li>`
+                                ).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    ${insights.recent_action_items && insights.recent_action_items.length > 0 ? `
+                        <div class="analysis-section">
+                            <h4>Recent Action Items</h4>
+                            ${insights.recent_action_items.map(item => 
+                                `<div class="action-item">${item}</div>`
+                            ).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Analysis failed: ${error.message}</p>`;
+            }
+        }
+
+        // Initial load
+        loadStats();
+        loadTeams();
+        
+        // Refresh stats every 30 seconds
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+</html>
