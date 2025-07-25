@@ -17,6 +17,7 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 | D009 | 2024-01-15 | Simplified demo for education | ✅ Implemented | [ADR-009](docs/adr/009-simplified-demo.md) |
 | D010 | 2025-01-25 | OMI-Mem0 memory integration | ✅ Implemented | [ADR-010](docs/adr/010-memory-integration.md) |
 | D011 | 2025-01-25 | Three Layer IA alignment | ✅ Implemented | [ADR-011](docs/adr/011-three-layer-ia-alignment.md) |
+| D012 | 2025-01-25 | Neuro-focused agent extensions | 🔄 Proposed | [ADR-012](docs/adr/012-neuro-agent-extensions.md) |
 
 ## Decision Details
 
@@ -85,6 +86,12 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 - **Decision**: Align agents with Semantic/Kinetic/Dynamic layers
 - **Consequences**: Clear boundaries, better scalability
 - **Status**: Architecture documented and aligned
+
+### D012: Neuro-Focused Agent Extensions
+- **Context**: Need specialized agents for neurological health use cases
+- **Decision**: Implement six neuro agents across IA layers
+- **Consequences**: Better educational value, real-world relevance
+- **Status**: Proposed with demo implementation
 
 ## Decision Process
 
