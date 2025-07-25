@@ -22,7 +22,7 @@ NeuroHub demonstrates how wearable AI devices (like OMI) can work with multiple 
 ### Prerequisites
 
 - Python 3.11 or newer
-- Docker Desktop
+- Docker Desktop (optional - only for full multi-agent system)
 - Git
 
 ### Installation
@@ -45,6 +45,17 @@ cp .env.example .env.local
 
 ### Running the Demo
 
+#### Option 1: Cloud Backend (Recommended for Workshops)
+```bash
+# Use pre-deployed backend
+export OMI_API_BASE_URL=https://neurohub-workshop.fly.dev
+export OMI_API_KEY=neurohub_workshop_2024
+
+# Run demo
+uv run python demo_simple.py
+```
+
+#### Option 2: Local Backend
 ```bash
 # Terminal 1: Start OMI Server
 ./scripts/start_omi_mcp.sh

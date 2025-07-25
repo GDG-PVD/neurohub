@@ -11,6 +11,8 @@
 | [ADR-005](005-llm-context-analysis.md) | LLM-based Context Analysis | 2025-07-24 | Accepted | ai, architecture | Use GPT-4 for conversation analysis and intent extraction |
 | [ADR-006](006-agentdb-integration.md) | Integrate AgentDB for Multi-Agent Data Persistence | 2025-07-24 | Accepted | data-persistence, architecture, agent-state | Use AgentDB for isolated agent and conversation storage |
 | [ADR-007](007-uv-package-manager.md) | Adopt UV as Package Manager | 2025-07-24 | Accepted | tooling, development, dependencies | Use UV for fast Python package management |
+| [ADR-008](008-cloud-deployment.md) | Cloud Deployment for Workshops | 2025-07-25 | Accepted | deployment, education | Pre-deploy backend to cloud for simplified workshop setup |
+| [ADR-009](009-simplified-demo.md) | Simplified Demo for Education | 2025-07-25 | Accepted | education, architecture | Create single-file demo that simulates multi-agent behavior |
 
 ## About ADRs
 

@@ -1,7 +1,8 @@
-# TODO List - OMI A2A Multi-Agent Demo
+# TODO List - NeuroHub (OMI A2A Multi-Agent Demo)
 
 ## ✅ Completed
 
+### Initial Development
 - [x] Research Google's A2A protocol and requirements
 - [x] Analyze OMI architecture for integration points
 - [x] Design multi-agent system architecture
@@ -21,6 +22,19 @@
   - Improved connection pooling
   - Added proper __init__.py files
   - Created test structure
+
+### Workshop Preparation (2024-01-15)
+- [x] Create simplified demo (demo_simple.py)
+- [x] Add cloud deployment support
+- [x] Create comprehensive student guides
+- [x] Create instructor materials
+- [x] Add workshop deployment scripts
+- [x] Create monitoring tools
+- [x] Update documentation for education
+- [x] Create DECISION_REGISTRY.md
+- [x] Add ADR-008 and ADR-009
+- [x] Clean up codebase for public release
+- [x] Push to GitHub (GDG-PVD/neurohub)
 
 ## 🚧 In Progress
 
