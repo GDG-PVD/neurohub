@@ -46,6 +46,30 @@ The OMI A2A Multi-Agent System demonstrates how multiple AI agents can collabora
 - **[Sequence Diagrams](sequence-diagrams.md)**: Key interaction flows
 - **[Data Flow](data-flow.md)**: How data moves through the system
 
+## Information Architecture
+
+The system follows a Three Layer Information Architecture approach that organizes complexity while preserving context:
+
+### Semantic Layer (Base Reality)
+Captures fundamental knowledge units and relationships:
+- **Agents**: Context Analysis, Knowledge Agent
+- **Function**: Extract meaning from raw conversation data
+- **Data**: Entities, topics, memories, relationships
+
+### Kinetic Layer (Process & Movement)
+Documents how data flows and processes interact:
+- **Agents**: Gateway Agent, Action Planning, Communication
+- **Function**: Orchestrate workflows and temporal sequences
+- **Data**: Actions, deadlines, message routing
+
+### Dynamic Layer (Evolution & Learning)
+Enables system adaptation and learning over time:
+- **Integration**: Mem0 platform, Workshop teams
+- **Function**: Memory evolution, pattern recognition
+- **Data**: Historical context, personalization
+
+See [ADR-011](../adr/011-three-layer-ia-alignment.md) for detailed architecture mapping.
+
 ## Design Principles
 
 1. **Separation of Concerns**: Each agent has a single, well-defined responsibility
@@ -53,6 +77,7 @@ The OMI A2A Multi-Agent System demonstrates how multiple AI agents can collabora
 3. **Scalability**: Agents can be scaled independently
 4. **Extensibility**: New agents can be added without modifying existing ones
 5. **Resilience**: System continues functioning if individual agents fail
+6. **Layered Architecture**: Clear boundaries between semantic, kinetic, and dynamic concerns
 
 ## Technology Stack
 

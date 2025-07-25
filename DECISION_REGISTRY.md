@@ -16,6 +16,7 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 | D008 | 2024-01-15 | Cloud deployment for workshops | ✅ Implemented | [ADR-008](docs/adr/008-cloud-deployment.md) |
 | D009 | 2024-01-15 | Simplified demo for education | ✅ Implemented | [ADR-009](docs/adr/009-simplified-demo.md) |
 | D010 | 2025-01-25 | OMI-Mem0 memory integration | ✅ Implemented | [ADR-010](docs/adr/010-memory-integration.md) |
+| D011 | 2025-01-25 | Three Layer IA alignment | ✅ Implemented | [ADR-011](docs/adr/011-three-layer-ia-alignment.md) |
 
 ## Decision Details
 
@@ -78,6 +79,12 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 - **Decision**: Integrate OMI memories with Mem0 platform
 - **Consequences**: Enhanced AI capabilities, optional dependency
 - **Status**: Fully implemented with fallback
+
+### D011: Three Layer IA Alignment
+- **Context**: Need comprehensive information architecture
+- **Decision**: Align agents with Semantic/Kinetic/Dynamic layers
+- **Consequences**: Clear boundaries, better scalability
+- **Status**: Architecture documented and aligned
 
 ## Decision Process
 

@@ -47,3 +47,4 @@ We will integrate OMI device memories with Mem0's AI memory platform through a M
 ## Related ADRs
 - [ADR-004: WebSocket OMI Integration](004-websocket-omi-integration.md) - Defines how we capture memories
 - [ADR-009: Simplified Demo](009-simplified-demo.md) - Memory features complement the simple demo
+- [ADR-011: Three Layer IA](011-three-layer-ia-alignment.md) - Memory spans Semantic and Dynamic layers

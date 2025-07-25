@@ -106,3 +106,9 @@ results = await orchestrator.execute_workflow(workflow)
 ## Notes
 
 The gateway pattern aligns well with A2A protocol's task-based communication model. This decision simplifies the initial implementation while keeping the door open for more sophisticated patterns later.
+
+## Related
+
+- [ADR-001: A2A Protocol](001-use-a2a-protocol.md) - Communication standard
+- [ADR-004: WebSocket Integration](004-websocket-omi-integration.md) - Real-time data flow
+- [ADR-011: Three Layer IA](011-three-layer-ia-alignment.md) - Gateway operates in Kinetic layer
