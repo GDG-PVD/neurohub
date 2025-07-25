@@ -47,8 +47,10 @@ class OMIConfig:
     
     @classmethod
     def from_env(cls) -> "OMIConfig":
+        # Support both OMI_API_URL and OMI_API_BASE_URL for compatibility
+        api_url = os.getenv("OMI_API_URL") or os.getenv("OMI_API_BASE_URL", "http://localhost:8000")
         return cls(
-            api_url=os.getenv("OMI_API_URL", "http://localhost:8000"),
+            api_url=api_url,
             api_key=os.getenv("OMI_API_KEY")
         )
 

@@ -3,7 +3,7 @@
 > An educational demonstration of multi-agent AI systems using OMI wearable device and the A2A protocol
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docker](https://img.shields.io/badge/Docker-Required-blue.svg)](https://www.docker.com/)
+[![Cloud](https://img.shields.io/badge/Cloud-First-blue.svg)](https://neurohub-workshop.fly.dev/)
 [![Python](https://img.shields.io/badge/Python-3.11+-green.svg)](https://www.python.org/)
 
 ## 🎯 What is NeuroHub?
@@ -14,7 +14,9 @@ NeuroHub demonstrates how wearable AI devices (like OMI) can work with multiple 
 
 - **Real OMI Integration**: Connect to actual OMI wearable device APIs
 - **Multi-Agent Simulation**: See how specialized AI agents can work together
-- **Memory Integration**: Sync OMI memories with Mem0 for persistent, searchable storage
+- **Cloud-First Architecture**: No Docker required - runs entirely in the cloud
+- **Airtable Integration**: Persistent storage with visual interface via MCP
+- **Memory Integration**: Sync OMI memories with Mem0 for searchable storage
 - **Context-Aware AI**: Agents can access past conversations for better responses
 - **Educational Focus**: Perfect for students learning about AI systems
 - **Easy Setup**: Simplified installation with UV package manager
@@ -24,8 +26,9 @@ NeuroHub demonstrates how wearable AI devices (like OMI) can work with multiple 
 ### Prerequisites
 
 - Python 3.11 or newer
-- Docker Desktop (optional - only for full multi-agent system)
 - Git
+- Internet connection (cloud-first architecture)
+- Docker Desktop (optional - only for local development)
 
 ### Installation
 
@@ -47,22 +50,18 @@ cp .env.example .env.local
 
 ### Running the Demo
 
-#### Option 1: Cloud Backend (Recommended for Workshops)
+#### Cloud Backend (Default - No Docker Required!)
 ```bash
-# Use pre-deployed backend
-export OMI_API_BASE_URL=https://neurohub-workshop.fly.dev
-export OMI_API_KEY=neurohub_workshop_2024
-
-# Run demo
+# Simply run the demo - cloud backend is preconfigured
 uv run python demo_simple.py
 ```
 
-#### Option 2: Local Backend
-```bash
-# Terminal 1: Start OMI Server
-./scripts/start_omi_mcp.sh
+That's it! The demo will connect to our cloud backend automatically.
 
-# Terminal 2: Run Demo
+#### Local Development (Optional)
+```bash
+# If you want to run everything locally:
+./scripts/start_omi_mcp.sh  # Requires Docker
 uv run python demo_simple.py
 ```
 

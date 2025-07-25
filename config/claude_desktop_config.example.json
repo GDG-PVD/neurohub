@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "airtable": {
+      "command": "node",
+      "args": ["/path/to/airtable-mcp-server/dist/index.js"],
+      "env": {
+        "AIRTABLE_API_KEY": "patXXXXXXXXXXXXXX",
+        "AIRTABLE_BASE_ID": "appXXXXXXXXXXXXXX"
+      }
+    },
+    "omi": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "OMI_API_KEY=your_omi_api_key_here",
+        "omiai/mcp-server"
+      ]
+    }
+  }
+}

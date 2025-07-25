@@ -18,6 +18,8 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 | D010 | 2025-01-25 | OMI-Mem0 memory integration | ✅ Implemented | [ADR-010](docs/adr/010-memory-integration.md) |
 | D011 | 2025-01-25 | Three Layer IA alignment | ✅ Implemented | [ADR-011](docs/adr/011-three-layer-ia-alignment.md) |
 | D012 | 2025-01-25 | Neuro-focused agent extensions | 🔄 Proposed | [ADR-012](docs/adr/012-neuro-agent-extensions.md) |
+| D013 | 2025-07-25 | Cloud-first architecture | ✅ Implemented | [ADR-009](docs/adr/009-cloud-first-architecture.md) |
+| D014 | 2025-07-25 | Airtable MCP integration | ✅ Implemented | [ADR-010](docs/adr/010-airtable-integration.md) |
 
 ## Decision Details
 
@@ -93,6 +95,18 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 - **Consequences**: Better educational value, real-world relevance
 - **Status**: Proposed with demo implementation
 
+### D013: Cloud-First Architecture
+- **Context**: Docker Desktop requirement created friction for workshops
+- **Decision**: Default to cloud backends, make Docker optional
+- **Consequences**: Zero local setup, internet dependency
+- **Status**: Fully implemented with cloud OMI backend
+
+### D014: Airtable MCP Integration
+- **Context**: Need persistent storage with visual interface
+- **Decision**: Use Airtable via MCP for data persistence
+- **Consequences**: Instant visualization, API rate limits
+- **Status**: Connector implemented, MCP config provided
+
 ## Decision Process
 
 1. **Identify Need**: Problem or opportunity arises
@@ -119,6 +133,7 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 | Full AgentDB integration | Mock implementation | AgentDB SDK not ready |
 | Local Docker requirement | Cloud deployment | Too complex for students |
 | AgentDB for workshop persistence | Mem0 integration | AgentDB API issues, Mem0 better fit |
+| Docker-first deployment | Cloud-first architecture | Simplified workshop setup |
 
 ## Related Documents
 
@@ -129,4 +144,4 @@ This document tracks all architectural decisions made for the NeuroHub (OMI + A2
 
 ---
 
-*Last Updated: 2025-01-25*
+*Last Updated: 2025-07-25*
