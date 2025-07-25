@@ -35,7 +35,7 @@ cd a2a-demo
 ./setup.sh
 
 # Edit .env.local with your API keys
-vi .env.local  # or use your preferred editor
+nano .env.local  # or use your preferred editor
 ```
 
 💡 **Using UV?** The setup script automatically detects and uses UV if installed. UV is much faster than pip for dependency resolution and installation.
