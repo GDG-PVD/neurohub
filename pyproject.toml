@@ -57,6 +57,10 @@ dev = [
     "httpx>=0.25.0",  # For testing
 ]
 
+demo = [
+    "rich>=13.0.0",  # For beautiful terminal output in demos
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

@@ -41,3 +41,6 @@ structlog>=23.0.0
 
 # Environment
 python-dotenv>=1.0.0
+
+# Display
+rich>=13.0.0
