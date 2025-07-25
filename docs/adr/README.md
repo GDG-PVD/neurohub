@@ -13,6 +13,9 @@
 | [ADR-007](007-uv-package-manager.md) | Adopt UV as Package Manager | 2025-07-24 | Accepted | tooling, development, dependencies | Use UV for fast Python package management |
 | [ADR-008](008-cloud-deployment.md) | Cloud Deployment for Workshops | 2025-07-25 | Accepted | deployment, education | Pre-deploy backend to cloud for simplified workshop setup |
 | [ADR-009](009-simplified-demo.md) | Simplified Demo for Education | 2025-07-25 | Accepted | education, architecture | Create single-file demo that simulates multi-agent behavior |
+| [ADR-010](010-memory-integration.md) | Memory Integration with OMI and Mem0 | 2025-01-25 | Accepted | integration, memory, ai | Integrate OMI memories with Mem0 AI memory platform |
+| [ADR-011](011-three-layer-ia-alignment.md) | Three Layer Information Architecture | 2025-01-25 | Accepted | architecture, design | Align agents with Semantic/Kinetic/Dynamic layers |
+| [ADR-012](012-neuro-agent-extensions.md) | Neurological Health Agent Extensions | 2025-01-25 | Proposed | agents, health, education | Create specialized neuro-focused agents for brain health |
 
 ## About ADRs
 

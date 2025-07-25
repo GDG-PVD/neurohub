@@ -68,10 +68,19 @@ uv run python demo_simple.py
 
 ## 📚 Documentation
 
+### For Students
 - **[Student Guide](STUDENT_GUIDE.md)** - Complete walkthrough for students
-- **[Instructor Presentation](INSTRUCTOR_PRESENTATION.md)** - Teaching materials and slides
 - **[Quick Reference](STUDENT_QUICK_REFERENCE.md)** - Command cheat sheet
 - **[UV Commands Guide](UV_COMMANDS_GUIDE.md)** - Understanding UV package manager
+
+### For Instructors
+- **[Instructor Presentation](INSTRUCTOR_PRESENTATION.md)** - Teaching materials and slides
+- **[Workshop Hackathon Guide](WORKSHOP_HACKATHON_GUIDE.md)** - 2-week hackathon framework
+
+### For Developers
+- **[Architecture Overview](docs/architecture/README.md)** - System design and patterns
+- **[Agent Development Guide](docs/NEURO_AGENTS.md)** - Building specialized agents
+- **[API Documentation](docs/apis/)** - External API integrations
 
 ## 🏗️ Architecture
 

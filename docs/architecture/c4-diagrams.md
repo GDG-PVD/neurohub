@@ -47,6 +47,7 @@ graph TB
     User[User with OMI Device]:::person
     OMIBackend[OMI Backend API]:::external
     Mem0[Mem0 Memory Platform<br/>AI Memory Storage]:::external
+    FutureHouse[FutureHouse API<br/>Scientific Research]:::external
     
     %% Containers
     subgraph System[OMI Multi-Agent System]

@@ -59,16 +59,27 @@
 - [x] Document Three Layer IA alignment
 - [x] Add rich terminal output for demos
 
+### Workshop Framework Integration (2025-01-25)  
+- [x] Create CustomAgent template with MCP integration
+- [x] Implement functional research agent with FutureHouse API
+- [x] Build collaboration agent for team meetings
+- [x] Create team setup script (setup_team.sh)
+- [x] Write comprehensive workshop tests
+- [x] Fix import issues with A2A wrappers
+- [x] Update ADR registry with new decisions
+- [x] Ensure Three Layer IA compliance
+
 ## 🚧 In Progress
 
 - [ ] Complete test implementation
   - [x] Unit test structure created
-  - [ ] Integration tests for agents
+  - [x] Workshop agent tests created
+  - [ ] Integration tests for full system
   - [ ] End-to-end workflow tests
 - [ ] Finalize documentation
   - [ ] API documentation with OpenAPI
-  - [ ] Update all READMEs
-  - [ ] Cross-link all ADRs
+  - [x] Update main README
+  - [x] Cross-link ADRs
 
 ## 📅 Planned
 
